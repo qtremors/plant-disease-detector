@@ -1,105 +1,145 @@
-🌿 Plant Disease Detector
-A web application built with Django and TensorFlow that uses a deep learning model to classify plant diseases from leaf images. Users can upload an image, and the application will predict the plant's health status, displaying the result with confidence scores.
+# 🌿 Plant Disease Detector
 
-(Replace the placeholder above with a screenshot of your application)
+A web application built with **Django** and **TensorFlow** that detects **apple leaf diseases** using deep learning. Upload an image of a leaf, and the app will predict the plant’s health status with confidence scores.
 
-⚠️ Important: Current Model Limitations
-This is a proof-of-concept implementation. The current model has been trained exclusively on apple leaf images.
+> 📸 *Insert a screenshot of your application here*
 
-Classes: The model can only identify the following four apple leaf conditions:
+---
 
-Apple Scab
+## ⚠️ Model Limitations
 
-Apple Black Rot
+🚧 This is a **proof-of-concept** model trained **only on apple leaf images**.
 
-Apple Cedar Rust
+### ✅ Recognized Classes:
 
-Healthy Apple Leaf
+* Apple Scab 🍏
+* Apple Black Rot 🍎
+* Apple Cedar Rust 🌲
+* Healthy Apple Leaf ✅
 
-Incorrect Predictions for Other Plants: If you upload an image of any other plant (e.g., a corn, potato, or tomato leaf), the model will still attempt to classify it as one of the four apple categories. It has no knowledge of other plant species.
+❗ **Important:** If you upload leaves from other plants (e.g., corn, tomato, potato), the model will still attempt to classify them as one of the above apple categories. It is not trained for other species.
 
-To expand the model's capabilities, it must be retrained on a broader dataset including other plants (see "Future Improvements" section).
+---
 
-✨ Features
-Image Upload: Simple web interface to upload a plant leaf image.
+## ✨ Features
 
-AI-Powered Prediction: Uses a fine-tuned MobileNetV2 model to classify the disease.
+* 📄 Upload leaf images via a simple web UI
+* 🤖 Deep learning predictions using **MobileNetV2**
+* 📊 Interactive **Plotly** bar chart for top-3 predictions
+* 📱 Fully responsive layout using **Bootstrap 5**
 
-Confidence Scores: Displays a Plotly bar chart showing the model's confidence in the top 3 predictions.
+---
 
-Responsive UI: Clean interface built with Bootstrap that works on desktop and mobile.
+## 🛠️ Tech Stack
 
-🛠️ Technology Stack
-Backend: Django
+| Layer         | Technology Used                 |
+| ------------- | ------------------------------- |
+| Backend       | Django                          |
+| Frontend      | HTML, Bootstrap 5               |
+| ML Model      | TensorFlow, Keras (MobileNetV2) |
+| Visualization | Plotly                          |
+| Libraries     | Pillow, NumPy                   |
 
-Machine Learning: TensorFlow, Keras
+---
 
-ML Model: MobileNetV2 (via Transfer Learning)
+## 🚀 Getting Started
 
-Data Visualization: Plotly
+### 1. Prerequisites
 
-Frontend: HTML, Bootstrap 5
+* Python 3.8+
+* Git
 
-Core Libraries: Pillow, NumPy
+### 2. Clone the Repository
 
-🚀 Getting Started
-Follow these instructions to set up and run the project locally.
-
-1. Prerequisites
-Python 3.8+
-
-Git
-
-2. Clone the Repository
+```bash
 git clone <your-repository-url>
 cd plant-disease-detector
+```
 
-3. Set Up the Virtual Environment
-Windows:
+### 3. Create Virtual Environment
 
+**Windows:**
+
+```bash
 python -m venv venv
 .\venv\Scripts\activate
+```
 
-macOS/Linux:
+**macOS/Linux:**
 
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-4. Install Dependencies
+### 4. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-5. Prepare the Dataset for Training
-Download: Download the "New Plant Diseases Dataset (Augmented)" from Kaggle.
+---
 
-Extract: Unzip the file into the project's root directory.
+## 🧪 Model Training (Optional)
 
-Filter for Apple Data: To replicate the current model, navigate into the dataset folders (.../train and .../valid) and delete all sub-folders except for the ones related to apples:
+### 5. Download Dataset
 
+* Download the **New Plant Diseases Dataset (Augmented)** from [Kaggle](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
+* Unzip into the project root folder
+
+### 6. Filter for Apple Leaf Data Only
+
+In both `train/` and `valid/` folders, **keep only**:
+
+```
 Apple___Apple_scab
-
 Apple___Black_rot
-
 Apple___Cedar_apple_rust
-
 Apple___healthy
+```
 
-6. Train the Model
-Run the training script. This will generate the plant_disease_model.h5 and class_labels.json files.
+### 7. Train the Model
 
+```bash
 python train_model.py
+```
 
-7. Run the Django Application
+This will generate:
+
+* `plant_disease_model.h5`
+* `class_labels.json`
+
+---
+
+## 🌐 Run the Application
+
+```bash
 python manage.py migrate
 python manage.py runserver
+```
 
-Open your browser and navigate to http://127.0.0.1:8000/.
+Open your browser and visit:
+👉 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-📈 Future Improvements
-Expand the Dataset: Retrain the model on the full Plant Village dataset to include more plant species and diseases.
+---
 
-Add a Map Feature: Use JavaScript's Geolocation API and a library like Leaflet.js to allow users to (optionally) submit their location, plotting disease reports on a map.
+## 📈 Future Improvements
 
-Improve Model Accuracy: Experiment with more training epochs, different model architectures, or further fine-tuning of the base model layers.
+* 🔍 Retrain model with the full **PlantVillage** dataset to support multiple plant types and diseases
+* 🗌️ Add location tracking using **Leaflet.js** and the **Geolocation API**
+* 🎯 Improve accuracy through model tuning and experimentation
+* ☁️ Deploy to **Heroku**, **AWS**, or **GCP** for public use
 
-Deployment: Deploy the application to a cloud platform like Heroku, AWS, or Google Cloud Platform for public access.# plant-disease-detector
-A web application built with Django and TensorFlow that uses a deep learning model to classify plant diseases from leaf images. Users can upload an image, and the application will predict the plant's health status, displaying the result with confidence scores.
+---
+
+## 📄 License
+
+[MIT](LICENSE)
+
+---
+
+## 🙌 Acknowledgements
+
+* [PlantVillage Dataset](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
+* [TensorFlow](https://www.tensorflow.org/)
+* [Django](https://www.djangoproject.com/)
