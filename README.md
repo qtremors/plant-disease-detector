@@ -1,10 +1,17 @@
 # 🌿 Plant Disease Detector
 
 A web application built with **Django** and **TensorFlow** that detects **apple leaf diseases** using deep learning. Upload an image of a leaf, and the app will predict the plant’s health status with confidence scores.
+## Apple scab input
+![[apple scab input.png]]
 
-> 📸 *Insert a screenshot of your application here*
+## Apple scab output
+![[apple scab output.png]]
 
----
+## Apple rust input
+![[apple rust input.png]]
+
+## Apple rust output
+![[apple rust output.png]]
 
 ## ⚠️ Model Limitations
 
@@ -132,14 +139,11 @@ Open your browser and visit:
 
 ---
 
-## 📄 License
-
-[MIT](LICENSE)
-
----
 
 ## 🙌 Acknowledgements
 
 * [PlantVillage Dataset](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
 * [TensorFlow](https://www.tensorflow.org/)
 * [Django](https://www.djangoproject.com/)
+
+[^1]: 
