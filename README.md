@@ -59,7 +59,7 @@ A web application built with **Django** and **TensorFlow** that detects **apple 
 ### 2. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/qtremors/plant-disease-detector
 cd plant-disease-detector
 ```
 
@@ -82,7 +82,7 @@ source venv/bin/activate
 ### 4. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install django tensorflow Pillow numpy plotly
 ```
 
 ---
