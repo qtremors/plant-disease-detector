@@ -2,16 +2,16 @@
 
 A web application built with **Django** and **TensorFlow** that detects **apple leaf diseases** using deep learning. Upload an image of a leaf, and the app will predict the plant’s health status with confidence scores.
 ## Apple scab input
-![A screenshot of the application running](screenshots/apple scab input.png)
+![Apple scab input](screenshots/apple-scab-input.png)
 
 ## Apple scab output
-![[apple scab output.png]]
+![Apple scab output](screenshots/apple-scab-output.png)
 
 ## Apple rust input
-![[apple rust input.png]]
+![Apple rust input](screenshots/apple-rust-input.png)
 
 ## Apple rust output
-![[apple rust output.png]]
+![Apple rust output](screenshots/apple-rust-output.png)
 
 ## ⚠️ Model Limitations
 
