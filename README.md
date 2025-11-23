@@ -1,149 +1,127 @@
-# 🌿 Plant Disease Detector
+# 🌿 Apple Disease Detector
 
-A web application built with **Django** and **TensorFlow** that detects **apple leaf diseases** using deep learning. Upload an image of a leaf, and the app will predict the plant’s health status with confidence scores.
-## Apple scab input
-![Apple scab input](screenshots/apple-scab-input.png)
+A web application built with **Django** and **TensorFlow** that detects diseases in apple leaves using deep learning. This project serves as a **Proof of Concept (PoC)** to demonstrate the integration of a Convolutional Neural Network (MobileNetV2) into a full-stack Django application.
 
-## Apple scab output
-![Apple scab output](screenshots/apple-scab-output.png)
+| Apple scab input | Apple scab output |
+|:---------:|:------------:|
+| ![Apple scab input](assets/apple-scab-input.png) | ![Apple scab output](assets/apple-scab-output.png) |
 
-## Apple rust input
-![Apple rust input](screenshots/apple-rust-input.png)
 
-## Apple rust output
-![Apple rust output](screenshots/apple-rust-output.png)
+| Random input | History Page |
+|:---------:|:------------:|
+| ![Random input](assets/random.png) | ![History Page](assets/history.png) |
 
-## ⚠️ Model Limitations
+---
 
-🚧 This is a **proof-of-concept** model trained **only on apple leaf images**.
+## ⚠️ Important Disclaimers & Limitations
 
-### ✅ Recognized Classes:
+This is a **student/portfolio project** designed for educational purposes. Please be aware of the following technical limitations:
 
-* Apple Scab 🍏
-* Apple Black Rot 🍎
-* Apple Cedar Rust 🌲
-* Healthy Apple Leaf ✅
+### 1. Limited Scope (Apple Leaves Only)
+This model was trained on a specific subset of the **PlantVillage dataset** containing **only apple leaves**. It does **not** have an "Unknown" or "Background" class.
+* **Result:** If you upload an image of a different plant (e.g., a tomato leaf) or a non-plant object (e.g., a cat, a car), the model will **incorrectly classify it** as one of the apple diseases with high confidence.
+* **Why?** The model's final layer (Softmax) forces all predictions to sum to 100%, compelling it to choose the "closest match" even if the input is completely unrelated.
 
-❗ **Important:** If you upload leaves from other plants (e.g., corn, tomato, potato), the model will still attempt to classify them as one of the above apple categories. It is not trained for other species.
+### 2. Production Readiness
+This application is **not** intended for actual agricultural use. Real-world field conditions (bad lighting, blurry photos, multiple leaves in frame) may significantly affect accuracy.
+
+---
+
+## ✅ Recognized Classes
+
+The model is trained to identify **only** these four specific conditions:
+
+| Class Label | Description |
+| :--- | :--- |
+| **Apple Scab** | Fungal disease causing dark, scabby spots on leaves. |
+| **Black Rot** | Fungal disease causing circular brown spots and fruit rot. |
+| **Cedar Apple Rust** | Fungal disease appearing as bright orange/yellow spots. |
+| **Healthy** | A healthy apple leaf with no visible symptoms. |
 
 ---
 
 ## ✨ Features
 
-* 📄 Upload leaf images via a simple web UI
-* 🤖 Deep learning predictions using **MobileNetV2**
-* 📊 Interactive **Plotly** bar chart for top-3 predictions
-* 📱 Fully responsive layout using **Bootstrap 5**
+* **📄 Drag-and-Drop Upload:** Simple web UI for uploading leaf images.
+* **🧠 Deep Learning:** Uses a **MobileNetV2** model (Transfer Learning) for efficient on-device inference.
+* **📊 Confidence Scoring:** Displays the model's certainty percentage.
+* **📈 Data Visualization:** Interactive bar charts using **Plotly.js**.
+* **💾 Database History:** Keeps a record of previous scans and results (SQLite).
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer         | Technology Used                 |
-| ------------- | ------------------------------- |
-| Backend       | Django                          |
-| Frontend      | HTML, Bootstrap 5               |
-| ML Model      | TensorFlow, Keras (MobileNetV2) |
-| Visualization | Plotly                          |
-| Libraries     | Pillow, NumPy                   |
+| Component | Technology |
+| :--- | :--- |
+| **Framework** | Django 5.0 (Python) |
+| **ML Engine** | TensorFlow / Keras |
+| **Base Model** | MobileNetV2 (Pre-trained on ImageNet) |
+| **Frontend** | Bootstrap 5, Plotly.js |
+| **Package Mgr** | `uv` (Fast Python package installer) |
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Prerequisites
-
-* Python 3.8+
-* Git
-
-### 2. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/qtremors/plant-disease-detector
+git clone https://github.com/qtremors/plant-disease-detector.git
 cd plant-disease-detector
-```
+````
 
-### 3. Create Virtual Environment
+### 2. Initialize Environment (using `uv`)
 
-**Windows:**
-
-```bash
-python -m venv venv
-.\venv\Scripts\activate
-```
-
-**macOS/Linux:**
+This project uses `uv` for fast dependency management.
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+# Install dependencies
+uv sync
+
+# OR manually with pip
+pip install django tensorflow pillow numpy plotly
 ```
 
-### 4. Install Dependencies
+### 3. Setup Database
 
 ```bash
-pip install django tensorflow Pillow numpy plotly
+uv run python manage.py migrate
 ```
+
+### 4. Run the Server
+
+```
+uv run python manage.py runserver
+```
+
+Open your browser and visit: **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
+
+
+## 🧠 Model Training Details
+
+The model uses **Transfer Learning** with the following architecture:
+
+1.  **Base:** MobileNetV2 (frozen weights, pre-trained on ImageNet).
+2.  **Head:** GlobalAveragePooling2D → Dense (1024, ReLU) → Output Dense (4, Softmax).
+3.  **Dataset:** [New Plant Diseases Dataset (Augmented)](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset) sourced via `kagglehub`.
+4.  **Training:** Trained for 5 epochs using the Adam optimizer (`lr=0.001`).
 
 ---
+```python
+# Python Script for downloading the dataset
 
-## 🧪 Model Training (Optional)
+import os
+# Set your custom directory
+# ⚠️ You must set this variable BEFORE importing kagglehub
+os.environ["KAGGLEHUB_CACHE"] = r"Z:\datasets"
 
-### 5. Download Dataset
+import kagglehub
 
-* Download the **New Plant Diseases Dataset (Augmented)** from [Kaggle](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
-* Unzip into the project root folder
+# This will now download somewhere inside Z:\datasets
+path = kagglehub.dataset_download("vipoooool/new-plant-diseases-dataset")
 
-### 6. Filter for Apple Leaf Data Only
-
-In both `train/` and `valid/` folders, **keep only**:
-
-```
-Apple___Apple_scab
-Apple___Black_rot
-Apple___Cedar_apple_rust
-Apple___healthy
+print("Path to dataset files:", path)
 ```
 
-### 7. Train the Model
-
-```bash
-python train_model.py
-```
-
-This will generate:
-
-* `plant_disease_model.h5`
-* `class_labels.json`
-
----
-
-## 🌐 Run the Application
-
-```bash
-python manage.py migrate
-python manage.py runserver
-```
-
-Open your browser and visit:
-👉 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-
----
-
-## 📈 Future Improvements
-
-* 🔍 Retrain model with the full **PlantVillage** dataset to support multiple plant types and diseases
-* 🗌️ Add location tracking using **Leaflet.js** and the **Geolocation API**
-* 🎯 Improve accuracy through model tuning and experimentation
-* ☁️ Deploy to **Heroku**, **AWS**, or **GCP** for public use
-
----
-
-
-## 🙌 Acknowledgements
-
-* [PlantVillage Dataset](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
-* [TensorFlow](https://www.tensorflow.org/)
-* [Django](https://www.djangoproject.com/)
-
-[^1]: 
+*Note: The training script `train_model.py` is included. You can download the dataset automatically using `kagglehub` to retrain the model.*
