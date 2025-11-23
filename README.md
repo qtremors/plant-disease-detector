@@ -78,9 +78,6 @@ This project uses `uv` for fast dependency management.
 ```bash
 # Install dependencies
 uv sync
-
-# OR manually with pip
-pip install django tensorflow pillow numpy plotly
 ```
 
 ### 3. Setup Database
