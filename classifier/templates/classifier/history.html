@@ -1,0 +1,42 @@
+{% extends 'classifier/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-success">📜 Scan History</h2>
+        <a href="{% url 'index' %}" class="btn btn-primary">New Scan</a>
+    </div>
+
+    {% if scans %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for scan in scans %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ scan.image.url }}" class="card-img-top" alt="Leaf Scan" 
+                     style="height: 200px; object-fit: cover;">
+                
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ scan.predicted_label|cut:"Apple___"|cut:"_" }}
+                    </h5>
+                    <p class="card-text">
+                        <span class="badge {% if scan.confidence > 0.8 %}bg-success{% else %}bg-warning{% endif %}">
+                            Confidence: {{ scan.confidence_percentage }}%
+                        </span>
+                    </p>
+                    <small class="text-muted">
+                        Scanned: {{ scan.created_at|date:"M d, Y H:i" }}
+                    </small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <p class="text-muted fs-4">No history found.</p>
+        <a href="{% url 'index' %}" class="btn btn-outline-success">Start your first scan</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
