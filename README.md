@@ -1,4 +1,4 @@
-# 🌿 Apple Disease Detector
+# 🌿 Plant Disease Detector
 
 A web application built with **Django** and **TensorFlow** that detects diseases in apple leaves using deep learning. This project serves as a **Proof of Concept (PoC)** to demonstrate the integration of a Convolutional Neural Network (MobileNetV2) into a full-stack Django application.
 

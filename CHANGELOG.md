@@ -1,8 +1,16 @@
 # Plant Disease Detector Changelog
 
 > **Project:** Plant Disease Detector  
-> **Version:** 0.0.2  
-> **Last Updated:** 2025-11-23
+> **Version:** 0.0.3  
+> **Last Updated:** 2025-11-24
+
+---
+
+## [0.0.3] - 2025-11-24
+
+### Changed
+
+- Updated the README project heading to Plant Disease Detector.
 
 ---
 
