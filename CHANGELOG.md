@@ -1,8 +1,21 @@
 # Plant Disease Detector Changelog
 
 > **Project:** Plant Disease Detector  
-> **Version:** 0.0.3  
-> **Last Updated:** 2025-11-24
+> **Version:** 0.0.4  
+> **Last Updated:** 2026-01-12
+
+---
+
+## [0.0.4] - 2026-01-12
+
+### Added
+
+- Developer documentation, project task tracking, and license documentation.
+
+### Changed
+
+- Refreshed project documentation, the preview banner, and the history screenshot.
+- Updated the license to Tremors Source License Version 2.0 and its README reference.
 
 ---
 
